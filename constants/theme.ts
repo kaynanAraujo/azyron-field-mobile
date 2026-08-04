@@ -1,53 +1,171 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+import type { TextStyle, ViewStyle } from "react-native";
 
-import { Platform } from 'react-native';
+import type { MetricTone } from "@/types/dashboard";
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+export const colors = {
+  background: "#0B0D12",
+  surface: "#151820",
+  surfaceElevated: "#1B1F29",
+  border: "#292D38",
+  borderStrong: "#373C49",
+  primary: "#7C5CFC",
+  primarySoft: "#252035",
+  primaryLight: "#B9A8FF",
+  text: "#FFFFFF",
+  textSecondary: "#A7ABB7",
+  textMuted: "#7D8290",
+  success: "#59D49C",
+  successSoft: "#172A22",
+  warning: "#F2B65D",
+  warningSoft: "#2E2618",
+  danger: "#FF7185",
+  dangerSoft: "#311C24",
+  info: "#6CB6FF",
+  infoSoft: "#172637",
+  black: "#000000",
+  white: "#FFFFFF",
+  overlay: "rgba(5, 6, 10, 0.72)",
+} as const;
 
-export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+export const spacing = {
+  xxs: 4,
+  xs: 8,
+  sm: 12,
+  md: 16,
+  lg: 20,
+  xl: 24,
+  xxl: 32,
+  xxxl: 40,
+  section: 28,
+  screen: 24,
+} as const;
+
+export const radii = {
+  small: 10,
+  medium: 14,
+  large: 18,
+  xlarge: 24,
+  pill: 999,
+} as const;
+
+export const layout = {
+  dashboardContentMaxWidth: 720,
+  compactScreenMaxWidth: 359,
+  quickActionsTwoColumnMinWidth: 430,
+  minimumTouchTarget: 44,
+  mediumIconSize: 40,
+  metricCardMinWidth: 132,
+  metricCardMinHeight: 150,
+  quickActionMinHeight: 104,
+  dashboardSectionGap: spacing.xxl,
+} as const;
+
+export const touchInsets = {
+  comfortable: {
+    top: spacing.xs,
+    right: spacing.xs,
+    bottom: spacing.xs,
+    left: spacing.xs,
   },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+} as const;
+
+export const typography = {
+  sizes: {
+    eyebrow: 12,
+    caption: 13,
+    small: 14,
+    body: 15,
+    bodyLarge: 17,
+    subtitle: 20,
+    title: 28,
+    display: 34,
+    metric: 32,
+  },
+  lineHeights: {
+    compact: 18,
+    caption: 18,
+    small: 20,
+    body: 22,
+    bodyLarge: 25,
+    subtitle: 27,
+    title: 34,
+    display: 40,
+  },
+  weights: {
+    regular: "400" as TextStyle["fontWeight"],
+    medium: "500" as TextStyle["fontWeight"],
+    semibold: "600" as TextStyle["fontWeight"],
+    bold: "700" as TextStyle["fontWeight"],
+  },
+} as const;
+
+export const shadows: Record<"card" | "floating" | "primary", ViewStyle> = {
+  card: {
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    elevation: 3,
+  },
+  floating: {
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.24,
+    shadowRadius: 22,
+    elevation: 6,
+  },
+  primary: {
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.28,
+    shadowRadius: 14,
+    elevation: 5,
   },
 };
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+export const tones = {
+  primary: {
+    accent: colors.primary,
+    background: colors.primarySoft,
+    border: colors.primary,
   },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+  success: {
+    accent: colors.success,
+    background: colors.successSoft,
+    border: colors.success,
   },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+  warning: {
+    accent: colors.warning,
+    background: colors.warningSoft,
+    border: colors.warning,
   },
-});
+  danger: {
+    accent: colors.danger,
+    background: colors.dangerSoft,
+    border: colors.danger,
+  },
+  info: {
+    accent: colors.info,
+    background: colors.infoSoft,
+    border: colors.info,
+  },
+  neutral: {
+    accent: colors.textSecondary,
+    background: colors.surfaceElevated,
+    border: colors.borderStrong,
+  },
+} as const satisfies Record<
+  MetricTone,
+  { accent: string; background: string; border: string }
+>;
+
+export const theme = {
+  colors,
+  spacing,
+  radii,
+  layout,
+  touchInsets,
+  typography,
+  shadows,
+  tones,
+} as const;
